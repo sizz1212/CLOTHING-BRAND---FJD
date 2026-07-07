@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — FJD</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}.reveal.revealed{opacity:1;transform:translateY(0)}
+    .related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+    @media(max-width:768px){.related-grid{grid-template-columns:repeat(2,1fr)}}
+    .img-thumb-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">FJD<span>BE POLITE.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="collections.html">Collections</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="wishlist.html" class="nav-icon-btn"><i class="far fa-heart"></i><span class="nav-badge wishlist-badge" style="display:none">0</span></a>
+        <a href="cart.html" class="nav-icon-btn"><i class="fas fa-shopping-bag"></i><span class="nav-badge cart-badge" style="display:none">0</span></a>
+        <button class="nav-hamburger" id="hamburger"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></button>
+      </div>
+    </div>
+  </div>
+</nav>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a><a href="shop.html">Shop</a><a href="collections.html">Collections</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="cart.html">Cart</a><a href="wishlist.html">Wishlist</a>
+</nav>
+
+<div class="page-top">
+  <div class="container">
+    <div class="breadcrumb" id="breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="shop.html">Shop</a>
+      <i class="fas fa-chevron-right"></i>
+      <span id="breadcrumbName">Product</span>
+    </div>
+
+    <div class="product-layout" id="productLayout">
+      <!-- Filled by JS -->
+    </div>
+
+    <!-- Related Products -->
+    <div style="padding-bottom:80px;">
+      <div class="section-header reveal" style="margin-top:60px;">
+        <div>
+          <div class="section-label">You might also like</div>
+          <h2>Related Products</h2>
+        </div>
+        <a href="shop.html" class="view-all">See All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="related-grid" id="relatedGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="logo-text">FJD</div><div class="tagline">BE POLITE.</div><p>Clothing made with care.</p><div class="social-row"><a href="#" class="social-btn"><i class="fab fa-instagram"></i></a><a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a></div></div>
+      <div class="footer-col"><h5>Shop</h5><ul><li><a href="shop.html">All</a></li><li><a href="shop.html?cat=T-Shirts">T-Shirts</a></li><li><a href="shop.html?cat=Hoodies">Hoodies</a></li></ul></div>
+      <div class="footer-col"><h5>Brand</h5><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h5>Support</h5><ul><li><a href="#">Size Guide</a></li><li><a href="#">Returns</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 FJD Clothing.</p></div>
+  </div>
+</footer>
+<div class="toast-container"></div>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get('id')) || 1;
+  const product = getProductById(id);
+  if (!product) { window.location.href = '404.html'; return; }
+
+  document.title = `${product.name} — FJD`;
+  document.getElementById('breadcrumbName').textContent = product.name;
+
+  const imgColors = [product.img, product.img, product.img, product.img];
+  const thumbsHTML = imgColors.map((c,i) => `
+    <div class="gallery-thumb${i===0?' active':''}" data-idx="${i}" style="background:${c};cursor:pointer;">
+      <div class="img-thumb-placeholder" style="background:${c};"></div>
+    </div>`).join('');
+
+  const wishlisted = Wishlist.has(id);
+  const colorsHTML = product.colors.map((c,i) =>
+    `<div class="color-swatch${i===0?' active':''}" style="background:${c}" data-color="${c}" title="${c}"></div>`
+  ).join('');
+  const sizesHTML = product.sizes.map((s,i) =>
+    `<button class="size-btn${i===0?' active':''}" data-size="${s}">${s}</button>`
+  ).join('');
+  const priceHTML = product.originalPrice
+    ? `<span class="product-price-current">${formatPrice(product.price)}</span><span class="product-price-original">${formatPrice(product.originalPrice)}</span><span class="product-price-badge">${Math.round((1-product.price/product.originalPrice)*100)}% OFF</span>`
+    : `<span class="product-price-current">${formatPrice(product.price)}</span>`;
+  const stars = '★'.repeat(Math.round(product.rating)) + '☆'.repeat(5-Math.round(product.rating));
+
+  document.getElementById('productLayout').innerHTML = `
+    <div class="product-gallery">
+      <div class="gallery-main" id="galleryMain" >
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:${imgColors[0]};">
+          <svg width="120" height="200" viewBox="0 0 120 200" fill="none" opacity="0.2">
+            <path d="M30 0 L0 30 L15 38 L15 200 L105 200 L105 38 L120 30 L90 0 L30 0Z" fill="white"/>
+          </svg>
+        </div>
+      </div>
+      <div class="gallery-thumbs">${thumbsHTML}</div>
+    </div>
+    <div class="product-info reveal">
+      <div class="product-brand">FJD — ${product.category}</div>
+      <h1>${product.name}</h1>
+      <div class="product-rating">
+        <span class="stars">${stars}</span>
+        <span style="font-family:var(--font-head);font-size:.9rem;font-weight:700;color:var(--ink)">${product.rating}</span>
+        <span class="rating-count">(${product.reviews} reviews)</span>
+        <span class="rating-count">· ${product.sold} sold</span>
+      </div>
+      <div class="product-price-row">${priceHTML}</div>
+      <p style="margin-bottom:24px;line-height:1.75;">${product.description}</p>
+      <div class="option-label">Color <span style="font-weight:400;color:var(--ink-muted);text-transform:none;letter-spacing:0;" id="activeColorLabel">${product.colors[0]}</span></div>
+      <div class="color-options" id="colorOptions">${colorsHTML}</div>
+      <div class="option-label">Size <span class="size-guide">Size Guide</span></div>
+      <div class="size-options" id="sizeOptions">${sizesHTML}</div>
+      <div class="product-action-row">
+        <div class="qty-control">
+          <button class="qty-btn" id="qtyMinus"><i class="fas fa-minus"></i></button>
+          <input type="number" class="qty-input" id="qtyInput" value="1" min="1" max="10">
+          <button class="qty-btn" id="qtyPlus"><i class="fas fa-plus"></i></button>
+        </div>
+        <button class="add-to-cart-btn" id="addToCartBtn">
+          <i class="fas fa-shopping-bag"></i> Add to Cart
+        </button>
+      </div>
+      <button class="wishlist-btn-full${wishlisted?' wishlisted':''}" id="wishlistBtn">
+        <i class="${wishlisted?'fas':'far'} fa-heart"></i>
+        ${wishlisted ? 'Saved to Wishlist' : 'Add to Wishlist'}
+      </button>
+      <div class="product-tabs" style="margin-top:32px;">
+        <div class="tab-headers">
+          <button class="tab-header active" data-tab="details">Details</button>
+          <button class="tab-header" data-tab="care">Care</button>
+          <button class="tab-header" data-tab="shipping">Shipping</button>
+        </div>
+        <div class="tab-content active" id="tab-details">
+          <p>Category: ${product.category}</p>
+          <p>Available sizes: ${product.sizes.join(', ')}</p>
+          <p>Rating: ${product.rating}/5 from ${product.reviews} reviews</p>
+          <p>${product.sold}+ units sold.</p>
+        </div>
+        <div class="tab-content" id="tab-care">
+          <p>Machine wash cold with like colors. Do not bleach. Tumble dry low. Do not iron on print. For best results, wash inside out.</p>
+        </div>
+        <div class="tab-content" id="tab-shipping">
+          <p>Free shipping on orders over ₱2,000. Standard delivery 3–5 business days. Express delivery available at checkout.</p>
+        </div>
+      </div>
+    </div>`;
+
+  // Gallery thumb click
+  document.querySelectorAll('.gallery-thumb').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      const src = allImgs[parseInt(thumb.dataset.idx)];
+      document.getElementById('galleryMainImg').src = src;
+    });
+  });
+
+  // Color swatches
+  let selectedColor = product.colors[0];
+  document.getElementById('colorOptions').addEventListener('click', (e) => {
+    const swatch = e.target.closest('.color-swatch');
+    if (!swatch) return;
+    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+    swatch.classList.add('active');
+    selectedColor = swatch.dataset.color;
+    document.getElementById('activeColorLabel').textContent = selectedColor;
+  });
+
+  // Size btns
+  let selectedSize = product.sizes[0];
+  document.getElementById('sizeOptions').addEventListener('click', (e) => {
+    if (!e.target.classList.contains('size-btn') || e.target.classList.contains('unavailable')) return;
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    selectedSize = e.target.dataset.size;
+  });
+
+  // Qty
+  document.getElementById('qtyMinus').addEventListener('click', () => {
+    const inp = document.getElementById('qtyInput');
+    if (parseInt(inp.value) > 1) inp.value = parseInt(inp.value) - 1;
+  });
+  document.getElementById('qtyPlus').addEventListener('click', () => {
+    const inp = document.getElementById('qtyInput');
+    if (parseInt(inp.value) < 10) inp.value = parseInt(inp.value) + 1;
+  });
+
+  // Add to cart
+  document.getElementById('addToCartBtn').addEventListener('click', () => {
+    const qty = parseInt(document.getElementById('qtyInput').value);
+    Cart.add(id, selectedSize, selectedColor, qty);
+  });
+
+  // Wishlist
+  const wBtn = document.getElementById('wishlistBtn');
+  wBtn.addEventListener('click', () => {
+    const isNow = Wishlist.toggle(id);
+    wBtn.classList.toggle('wishlisted', isNow);
+    wBtn.querySelector('i').className = `${isNow?'fas':'far'} fa-heart`;
+    wBtn.innerHTML = `<i class="${isNow?'fas':'far'} fa-heart"></i> ${isNow?'Saved to Wishlist':'Add to Wishlist'}`;
+  });
+
+  // Tabs
+  document.querySelectorAll('.tab-header').forEach(h => {
+    h.addEventListener('click', () => {
+      document.querySelectorAll('.tab-header').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      h.classList.add('active');
+      document.getElementById('tab-' + h.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Related
+  const related = getRelatedProducts(id, 4);
+  document.getElementById('relatedGrid').innerHTML = related.map(renderProductCard).join('');
+
+  // Reveal observer
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('revealed');obs.unobserve(e.target);}}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+</script>
+</body>
+</html>

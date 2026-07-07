@@ -1,0 +1,126 @@
+/* ============================================
+   FJD — Responsive Styles
+   ============================================ */
+
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { padding: 60px 24px 48px; }
+  .hero-right { height: 420px; }
+  .hero-floating-tag { left: 20px; }
+  .hero-image-thumbnail { right: 20px; }
+
+  .collections-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .collection-card:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+
+  .products-grid { grid-template-columns: repeat(3, 1fr); }
+
+  .brand-inner { grid-template-columns: 1fr; gap: 40px; }
+  .brand-images { height: 320px; }
+
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-brand { grid-column: span 2; }
+
+  .shop-layout { grid-template-columns: 220px 1fr; }
+  .shop-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .product-layout { gap: 40px; }
+
+  .cart-layout { grid-template-columns: 1fr 300px; }
+
+  .wishlist-grid { grid-template-columns: repeat(3, 1fr); }
+
+  .about-story { gap: 40px; }
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .testimonials-grid { grid-template-columns: 1fr 1fr; }
+  .testimonials-grid .testimonial-card:last-child { display: none; }
+
+  .collections-full-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .mobile-nav { display: block; }
+
+  .hero-stats { gap: 24px; }
+  .stat-number { font-size: 1.4rem; }
+
+  .section-header { flex-direction: column; align-items: flex-start; }
+  .collections-section { padding: 60px 0; }
+  .collections-grid { grid-template-columns: 1fr; gap: 12px; }
+  .collection-card:nth-child(1) { grid-column: span 1; }
+  .collection-img { aspect-ratio: 16/9; }
+  .collection-card:nth-child(1) .collection-img { position: relative; aspect-ratio: 16/9; }
+
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+  .brand-values { grid-template-columns: 1fr; }
+  .brand-images { height: 260px; }
+
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .testimonials-grid .testimonial-card:last-child { display: block; }
+
+  .newsletter-form { flex-direction: column; padding: 16px; border-radius: var(--radius-md); }
+  .newsletter-form .btn { width: 100%; justify-content: center; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-brand { grid-column: span 1; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  .shop-layout { grid-template-columns: 1fr; }
+  .shop-sidebar {
+    position: static;
+    display: none;
+  }
+  .shop-sidebar.mobile-open { display: block; }
+  .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .shop-toolbar { flex-direction: column; align-items: stretch; }
+  .shop-search-bar { max-width: 100%; }
+
+  .product-layout { grid-template-columns: 1fr; gap: 32px; }
+  .gallery-thumbs { grid-template-columns: repeat(4, 1fr); }
+
+  .cart-layout { grid-template-columns: 1fr; }
+  .cart-summary { position: static; }
+  .cart-item { grid-template-columns: 80px 1fr; }
+  .cart-item-price { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; }
+
+  .wishlist-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+  .about-story { grid-template-columns: 1fr; gap: 32px; }
+  .mission-vision { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: 1fr 1fr; }
+
+  .contact-layout { grid-template-columns: 1fr; }
+  .contact-form-card { padding: 24px; }
+  .form-row { grid-template-columns: 1fr; }
+
+  .collections-full-grid { grid-template-columns: 1fr; }
+
+  .hero-cta { flex-direction: column; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+}
+
+/* ── Small Mobile (≤480px) ── */
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .products-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .wishlist-grid { grid-template-columns: 1fr 1fr; }
+  .shop-grid { grid-template-columns: 1fr 1fr; }
+  .hero-stats { flex-wrap: wrap; gap: 20px; }
+  .values-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .marquee-track { animation: none; }
+}

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — FJD</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+    .reveal.revealed{opacity:1;transform:translateY(0)}
+    .card-img img{width:100%;height:100%;object-fit:cover;object-position:center top}
+    .card-img{background:#f0ece4}
+    .card-img-link{display:block;text-decoration:none}
+
+    /* Category hero strips */
+    .shop-hero-banner {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      height: 200px;
+      margin-bottom: 32px;
+    }
+    .shop-hero-banner img {
+      width:100%;height:100%;object-fit:cover;object-position:center 20%;
+    }
+    .shop-hero-banner .overlay {
+      position:absolute;inset:0;
+      background:linear-gradient(to right,rgba(30,30,30,.55) 0%,transparent 65%);
+      display:flex;align-items:center;padding:32px;
+    }
+    .shop-hero-banner h2{color:#fff;font-size:1.6rem;margin:0;}
+    .shop-hero-banner p{color:rgba(255,255,255,.75);font-size:.85rem;margin-top:4px;}
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">FJD<span>BE POLITE.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html" class="active">Shop</a></li>
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="wishlist.html" class="nav-icon-btn"><i class="far fa-heart"></i><span class="nav-badge wishlist-badge" style="display:none">0</span></a>
+        <a href="cart.html" class="nav-icon-btn"><i class="fas fa-shopping-bag"></i><span class="nav-badge cart-badge" style="display:none">0</span></a>
+        <button class="nav-hamburger" id="hamburger"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></button>
+      </div>
+    </div>
+  </div>
+</nav>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a><a href="shop.html">Shop</a><a href="collections.html">Collections</a>
+  <a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="cart.html">Cart</a><a href="wishlist.html">Wishlist</a>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-top">
+  <div class="page-hero">
+    <h1>Shop All</h1>
+    <p>Honest clothing for every day. No noise, just good pieces.</p>
+  </div>
+</div>
+
+
+  <!-- Dynamic category hero banner -->
+  <div class="shop-hero-banner" id="shopBanner" style="display:none;">
+    <img id="shopBannerImg" src="" alt="">
+    <div class="overlay">
+      <div>
+        <h2 id="shopBannerTitle"></h2>
+        <p id="shopBannerSub"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="shop-layout">
+    <!-- Sidebar -->
+    <aside class="shop-sidebar" id="shopSidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Categories</div>
+        <div id="categoryFilters"></div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Price Range</div>
+        <div class="price-inputs">
+          <div class="price-input-wrap"><span>₱</span><input type="number" id="minPrice" placeholder="Min" min="0"></div>
+          <div class="price-input-wrap"><span>₱</span><input type="number" id="maxPrice" placeholder="Max" min="0"></div>
+        </div>
+        <input type="range" class="price-range-slider" id="priceRange" min="0" max="6000" value="6000" step="100">
+        <button class="apply-price-btn" id="applyPrice">Apply</button>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Rating</div>
+        <div class="filter-option"><label><input type="checkbox" data-rating="4.5"> ★★★★★ (4.5+)</label></div>
+        <div class="filter-option"><label><input type="checkbox" data-rating="4.0"> ★★★★☆ (4.0+)</label></div>
+      </div>
+      <button class="apply-price-btn" id="resetFilters" style="background:var(--border);color:var(--ink);margin-top:4px;">Reset Filters</button>
+    </aside>
+
+    <!-- Main -->
+    <main class="shop-main">
+      <div class="shop-toolbar">
+        <div class="shop-search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" id="shopSearch" placeholder="Search products…">
+        </div>
+        <div class="shop-toolbar-right">
+          <span class="results-count" id="resultsCount">Loading…</span>
+          <select class="sort-select" id="sortSelect">
+            <option value="newest">Newest</option>
+            <option value="best">Best Selling</option>
+            <option value="price-asc">Price: Low–High</option>
+            <option value="price-desc">Price: High–Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+          <div class="view-toggle">
+            <button class="view-btn active" id="gridView" title="Grid view"><i class="fas fa-th"></i></button>
+            <button class="view-btn" id="listView" title="List view"><i class="fas fa-list"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="active-filters" id="activeFilters"></div>
+      <div class="shop-grid" id="shopGrid"></div>
+    </main>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-text">FJD</div><div class="tagline">BE POLITE.</div>
+        <p>Clothing made with care, worn with intention.</p>
+        <div class="social-row">
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Shop</h5><ul><li><a href="shop.html">All Products</a></li><li><a href="shop.html?cat=T-Shirts">T-Shirts</a></li><li><a href="shop.html?cat=Hoodies">Hoodies</a></li><li><a href="shop.html?cat=Bottoms">Bottoms</a></li></ul></div>
+      <div class="footer-col"><h5>Brand</h5><ul><li><a href="about.html">About</a></li><li><a href="collections.html">Collections</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h5>Support</h5><ul><li><a href="#">Size Guide</a></li><li><a href="#">Shipping</a></li><li><a href="cart.html">My Cart</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 FJD Clothing. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<div class="toast-container"></div>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/filter.js"></script>
+<script src="js/app.js"></script>
+<script>
+// Category banner config
+const CAT_BANNERS = {
+  'T-Shirts':    { img:'images/tshirt2.png',  title:'T-Shirts',       sub:'Essential. Minimal. Yours.' },
+  'Hoodies':     { img:'images/hoodie.png',   title:'Hoodies',        sub:'Heavyweight fabric. Soft on the inside.' },
+  'Jackets':     { img:'images/fjd.png',      title:'Jackets',        sub:'Water-resistant. Lightweight. Made to move.' },
+  'Bottoms':     { img:'images/pants.png',    title:'Bottoms',        sub:'Relaxed fit. Built for everyday.' },
+  'Accessories': { img:'images/clothing.png', title:'Accessories',    sub:'Finish the look.' },
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const grid        = document.getElementById('shopGrid');
+  const countEl     = document.getElementById('resultsCount');
+  const activeFilEl = document.getElementById('activeFilters');
+  const catContainer= document.getElementById('categoryFilters');
+
+  // Build category filters
+  const counts = {};
+  FJD_PRODUCTS.forEach(p => counts[p.category] = (counts[p.category]||0)+1);
+  CATEGORIES.forEach(cat => {
+    catContainer.innerHTML += `
+      <div class="filter-option">
+        <label><input type="checkbox" data-cat="${cat}"> ${cat}</label>
+        <span class="filter-count">${counts[cat]||0}</span>
+      </div>`;
+  });
+
+  // URL params
+  const params = new URLSearchParams(window.location.search);
+  const urlCat  = params.get('cat');
+  const urlSort = params.get('sort');
+  if (urlCat)  { ShopFilter.toggleCategory(urlCat); const cb = catContainer.querySelector(`[data-cat="${urlCat}"]`); if (cb) cb.checked = true; showCatBanner(urlCat); }
+  if (urlSort) { ShopFilter.setSort(urlSort); document.getElementById('sortSelect').value = urlSort; }
+
+  function showCatBanner(cat) {
+    const cfg = CAT_BANNERS[cat];
+    if (!cfg) { document.getElementById('shopBanner').style.display='none'; return; }
+    document.getElementById('shopBannerImg').src   = cfg.img;
+    document.getElementById('shopBannerImg').alt   = cfg.title;
+    document.getElementById('shopBannerTitle').textContent = cfg.title;
+    document.getElementById('shopBannerSub').textContent   = cfg.sub;
+    document.getElementById('shopBanner').style.display    = 'block';
+  }
+
+  function renderGrid() {
+    const filtered = ShopFilter.apply(FJD_PRODUCTS);
+    countEl.textContent = `${filtered.length} product${filtered.length !== 1 ? 's' : ''}`;
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-search"></i><h3>No products found</h3><p>Try adjusting your filters.</p><button class="btn btn-primary" onclick="resetAll()">Clear Filters</button></div>`;
+    } else {
+      grid.innerHTML = filtered.map(renderProductCard).join('');
+    }
+    renderActiveTags();
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('revealed');obs.unobserve(e.target);} }),{threshold:.06});
+    grid.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  }
+
+  function renderActiveTags() {
+    const tags = [];
+    ShopFilter.state.categories.forEach(cat => {
+      tags.push(`<div class="filter-tag">${cat} <button onclick="removeCat('${cat}')"><i class="fas fa-times"></i></button></div>`);
+    });
+    if (ShopFilter.state.search) tags.push(`<div class="filter-tag">"${ShopFilter.state.search}" <button onclick="clearSearch()"><i class="fas fa-times"></i></button></div>`);
+    if (ShopFilter.state.maxPrice < 99999) tags.push(`<div class="filter-tag">Max ₱${ShopFilter.state.maxPrice} <button onclick="clearPrice()"><i class="fas fa-times"></i></button></div>`);
+    activeFilEl.innerHTML = tags.length ? tags.join('') + `<button class="clear-all-btn" onclick="resetAll()">Clear All</button>` : '';
+  }
+
+  window.removeCat    = (cat) => { ShopFilter.toggleCategory(cat); catContainer.querySelector(`[data-cat="${cat}"]`).checked=false; if(ShopFilter.state.categories.length===0) document.getElementById('shopBanner').style.display='none'; renderGrid(); };
+  window.clearSearch  = ()    => { ShopFilter.setSearch(''); document.getElementById('shopSearch').value=''; renderGrid(); };
+  window.clearPrice   = ()    => { ShopFilter.setPriceRange(0,99999); renderGrid(); };
+  window.resetAll     = ()    => {
+    ShopFilter.reset();
+    catContainer.querySelectorAll('input').forEach(cb=>cb.checked=false);
+    document.getElementById('shopSearch').value='';
+    document.getElementById('minPrice').value='';
+    document.getElementById('maxPrice').value='';
+    document.getElementById('sortSelect').value='newest';
+    document.getElementById('shopBanner').style.display='none';
+    renderGrid();
+  };
+
+  // Search
+  let st;
+  document.getElementById('shopSearch').addEventListener('input', e => { clearTimeout(st); st=setTimeout(()=>{ShopFilter.setSearch(e.target.value);renderGrid();},300); });
+  // Sort
+  document.getElementById('sortSelect').addEventListener('change', e => { ShopFilter.setSort(e.target.value); renderGrid(); });
+  // Category
+  catContainer.addEventListener('change', e => {
+    if (e.target.dataset.cat) {
+      ShopFilter.toggleCategory(e.target.dataset.cat);
+      if (ShopFilter.state.categories.length===1) showCatBanner(ShopFilter.state.categories[0]);
+      else document.getElementById('shopBanner').style.display='none';
+      renderGrid();
+    }
+  });
+  // Price
+  document.getElementById('applyPrice').addEventListener('click', () => {
+    const min=parseInt(document.getElementById('minPrice').value)||0;
+    const max=parseInt(document.getElementById('maxPrice').value)||99999;
+    ShopFilter.setPriceRange(min,max); renderGrid();
+  });
+  document.getElementById('priceRange').addEventListener('input', e => { document.getElementById('maxPrice').value=e.target.value; });
+  document.getElementById('resetFilters').addEventListener('click', resetAll);
+
+  // View toggle
+  document.getElementById('gridView').addEventListener('click', () => { grid.classList.remove('list-view'); document.getElementById('gridView').classList.add('active'); document.getElementById('listView').classList.remove('active'); });
+  document.getElementById('listView').addEventListener('click', () => { grid.classList.add('list-view'); document.getElementById('listView').classList.add('active'); document.getElementById('gridView').classList.remove('active'); });
+
+  renderGrid();
+});
+</script>
+</body>
+</html>

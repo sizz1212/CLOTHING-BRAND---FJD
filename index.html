@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FJD — BE POLITE.</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── Real image overrides ── */
+    .hero-right { background: #e8e4dc; }
+    .hero-image-main img { width:100%;height:100%;object-fit:cover;object-position:center top; }
+    .hero-image-thumbnail img { width:100%;height:100%;object-fit:cover; }
+
+    .collection-img { width:100%;height:100%;object-fit:cover;object-position:center;display:block; }
+    .collection-card { overflow:hidden; }
+    .collection-card:nth-child(1) .collection-img { position:absolute;inset:0;height:100%; }
+
+    .brand-img-main img,.brand-img-accent img { width:100%;height:100%;object-fit:cover;object-position:top center; }
+
+    /* card image style */
+    .card-img img { width:100%;height:100%;object-fit:cover;object-position:center top; }
+    .card-img { background:#f0ece4; }
+    .card-img-link { display:block;text-decoration:none; }
+
+    /* Tab strip for home product sections */
+    .product-tabs-strip {
+      display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap;
+    }
+    .prod-tab {
+      padding:8px 20px;border-radius:999px;font-family:var(--font-head);font-size:.8rem;font-weight:600;
+      border:1.5px solid var(--border);background:transparent;color:var(--ink-soft);cursor:pointer;transition:var(--transition);
+    }
+    .prod-tab.active,.prod-tab:hover { background:var(--sage);border-color:var(--sage);color:#fff; }
+  </style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div class="loader" id="loader">
+  <div class="loader-logo">FJD</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">FJD<span>BE POLITE.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="shop.html" class="nav-icon-btn" title="Search"><i class="fas fa-search"></i></a>
+        <a href="wishlist.html" class="nav-icon-btn" title="Wishlist">
+          <i class="far fa-heart"></i>
+          <span class="nav-badge wishlist-badge" style="display:none">0</span>
+        </a>
+        <a href="cart.html" class="nav-icon-btn" title="Cart">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="nav-badge cart-badge" style="display:none">0</span>
+        </a>
+        <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="collections.html">Collections</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="cart.html"><i class="fas fa-shopping-bag"></i> Cart</a>
+  <a href="wishlist.html"><i class="far fa-heart"></i> Wishlist</a>
+</nav>
+
+<!-- ════════════════════════════════════
+     HERO
+════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">New Season Drop</div>
+    <h1 class="hero-headline">Dress with<br>intention.</h1>
+    <div class="hero-tagline">BE POLITE.</div>
+    <p class="hero-description">
+      FJD makes clothing that respects your time, your body, and the people around you.
+      Clean cuts. Honest fabrics. A palette that works every day.
+    </p>
+    <div class="hero-cta">
+      <a href="shop.html" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Shop Now</a>
+      <a href="collections.html" class="btn btn-outline">View Collections</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">30+</div>
+        <div class="stat-label">Products</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4.8★</div>
+        <div class="stat-label">Avg Rating</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5k+</div>
+        <div class="stat-label">Happy Wearers</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-image-main">
+      <img src="images/fjd.png" alt="FJD Collection lookbook" loading="eager">
+    </div>
+    <div class="hero-image-overlay"></div>
+    <div class="hero-floating-tag">
+      <div class="floating-tag-icon"><i class="fas fa-leaf"></i></div>
+      <div class="floating-tag-text">
+        <strong>Sustainable Fabrics</strong>
+        <span>Ethically sourced</span>
+      </div>
+    </div>
+    <div class="hero-image-thumbnail">
+      <img src="images/hoodie.png" alt="FJD Hoodie">
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">Free shipping on orders over ₱2,000</span>
+    <span class="marquee-item">New arrivals every week</span>
+    <span class="marquee-item">Sustainable &amp; ethically made</span>
+    <span class="marquee-item">BE POLITE.</span>
+    <span class="marquee-item">Premium quality everyday wear</span>
+    <span class="marquee-item">Shop the new season collection</span>
+    <span class="marquee-item">Free shipping on orders over ₱2,000</span>
+    <span class="marquee-item">New arrivals every week</span>
+    <span class="marquee-item">Sustainable &amp; ethically made</span>
+    <span class="marquee-item">BE POLITE.</span>
+    <span class="marquee-item">Premium quality everyday wear</span>
+    <span class="marquee-item">Shop the new season collection</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     COLLECTIONS
+════════════════════════════════════ -->
+<section class="collections-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-label">Browse</div>
+        <h2>Shop by Collection</h2>
+      </div>
+      <a href="collections.html" class="view-all">All Collections <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="collections-grid">
+
+      <!-- Hero tile: Lookbook -->
+      <a href="shop.html" class="collection-card">
+        <img src="images/fjd.png" alt="FJD Lookbook" class="collection-img">
+        <div class="collection-overlay">
+          <div class="collection-label">Full Lookbook</div>
+          <div class="collection-name">Every Piece Has Purpose</div>
+          <div class="collection-link">Shop All <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </a>
+
+      <!-- T-Shirts -->
+      <a href="shop.html?cat=T-Shirts" class="collection-card">
+        <img src="images/tshirt.png" alt="T-Shirts" class="collection-img" style="object-position:center center;">
+        <div class="collection-overlay">
+          <div class="collection-label">Essentials</div>
+          <div class="collection-name">T-Shirts</div>
+          <div class="collection-link">Explore <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </a>
+
+      <!-- Graphic Tees -->
+      <a href="shop.html?cat=T-Shirts" class="collection-card">
+        <img src="images/tshirt2.png" alt="Graphic Tees" class="collection-img" style="object-position:center center;">
+        <div class="collection-overlay">
+          <div class="collection-label">Statement Pieces</div>
+          <div class="collection-name">Graphic Tees</div>
+          <div class="collection-link">Explore <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </a>
+
+      <!-- Hoodies -->
+      <a href="shop.html?cat=Hoodies" class="collection-card">
+        <img src="images/hoodie.png" alt="Hoodies" class="collection-img" style="object-position:center top;">
+        <div class="collection-overlay">
+          <div class="collection-label">Outerwear</div>
+          <div class="collection-name">Hoodies</div>
+          <div class="collection-link">Explore <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </a>
+
+      <!-- Bottoms -->
+      <a href="shop.html?cat=Bottoms" class="collection-card">
+        <img src="images/pants.png" alt="Bottoms" class="collection-img" style="object-position:center top;">
+        <div class="collection-overlay">
+          <div class="collection-label">Bottoms</div>
+          <div class="collection-name">Pants &amp; Shorts</div>
+          <div class="collection-link">Explore <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     PRODUCTS (tabbed: Best Sellers / New Arrivals)
+════════════════════════════════════ -->
+<section class="products-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-label">The Collection</div>
+        <h2>Shop Featured</h2>
+      </div>
+      <a href="shop.html" class="view-all">See All <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- Tab strip -->
+    <div class="product-tabs-strip">
+      <button class="prod-tab active" data-target="bestSellersGrid">Best Sellers</button>
+      <button class="prod-tab" data-target="newArrivalsGrid">New Arrivals</button>
+    </div>
+
+    <div id="bestSellersGrid" class="products-grid"></div>
+    <div id="newArrivalsGrid" class="products-grid" style="display:none"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     BRAND STORY
+════════════════════════════════════ -->
+<section class="brand-section">
+  <div class="container">
+    <div class="brand-inner">
+      <div class="brand-images">
+        <div class="brand-img-main">
+          <img src="images/hoodie.png" alt="FJD Hoodie — Sage Green">
+        </div>
+        <div class="brand-img-accent">
+          <img src="images/tshirt.png" alt="FJD Classic Tee">
+        </div>
+      </div>
+      <div class="brand-content reveal">
+        <div class="section-label">Our Story</div>
+        <h2>Clothing that earns its place in your wardrobe.</h2>
+        <p>FJD started with a simple belief: the best outfit is the one you don't have to think about. Clothes that fit well, feel good, and hold up over time.</p>
+        <p>We work with small factories that share our obsession with detail — the weight of the fabric, the finish of a seam, the hold of a zipper. Everything is made with the intention of lasting years, not seasons.</p>
+        <div class="brand-values">
+          <div class="brand-value">
+            <i class="fas fa-leaf"></i>
+            <h4>Sustainable</h4>
+            <p>Organic and recycled materials where possible.</p>
+          </div>
+          <div class="brand-value">
+            <i class="fas fa-hands-holding-heart"></i>
+            <h4>Ethical</h4>
+            <p>Fair wages, safe conditions, no shortcuts.</p>
+          </div>
+          <div class="brand-value">
+            <i class="fas fa-gem"></i>
+            <h4>Quality</h4>
+            <p>Built to outlast fast fashion by years.</p>
+          </div>
+          <div class="brand-value">
+            <i class="fas fa-palette"></i>
+            <h4>Thoughtful</h4>
+            <p>A palette that works together, not against itself.</p>
+          </div>
+        </div>
+        <a href="about.html" class="btn btn-primary">Read Our Story <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     FULL LOOKBOOK BANNER
+════════════════════════════════════ -->
+<section style="padding:0 0 0;">
+  <div class="container">
+    <div class="reveal" style="border-radius:20px;overflow:hidden;position:relative;margin-top:0;">
+      <img src="images/fjd.png" alt="FJD Lookbook" style="width:100%;display:block;max-height:560px;object-fit:cover;object-position:center top;">
+      <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(30,30,30,.62) 0%,transparent 60%);display:flex;align-items:center;padding:60px;">
+        <div>
+          <div class="section-label" style="background:rgba(255,255,255,.15);color:#fff;">SS 2025</div>
+          <h2 style="color:#fff;max-width:340px;margin-bottom:16px;">Every piece has a purpose.</h2>
+          <p style="color:rgba(255,255,255,.75);margin-bottom:28px;max-width:320px;">Pants. Hoodies. T-Shirts. Jackets. Shorts. Built for real life.</p>
+          <a href="shop.html" class="btn btn-primary">Shop the Collection</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════ -->
+<section class="social-proof" style="padding-top:80px;">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:40px;">
+      <div class="section-label" style="display:inline-block;">What people say</div>
+      <h2>Real reviews from real wearers</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"The Classic Hoodie is genuinely the best I've owned. The weight, the fit, the softness — it's what all hoodies should aspire to be."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar avatar-sage">AJ</div>
+          <div><div class="author-name">Angelo J.</div><div class="author-tag">Verified buyer · Quezon City</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I bought the Cargo Pants and they immediately became my most-worn piece. The fit is perfect and the fabric gets better every wash."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar avatar-blue">MR</div>
+          <div><div class="author-name">Maria R.</div><div class="author-tag">Verified buyer · Makati</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"FJD's sage green palette is so calming and easy to mix. The quality keeps me coming back every season."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar avatar-green">DL</div>
+          <div><div class="author-name">Dominic L.</div><div class="author-tag">Verified buyer · Cebu</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="section-label" style="background:rgba(255,255,255,.1);color:var(--sage-light);">Stay in the loop</div>
+      <h2>First to know, first to shop.</h2>
+      <p>New drops, restocks, and honest stories about how we make our clothes. No spam, ever.</p>
+      <form class="newsletter-form" novalidate>
+        <input type="email" placeholder="your@email.com" required>
+        <button type="submit" class="btn">Subscribe <i class="fas fa-arrow-right"></i></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-text">FJD</div>
+        <div class="tagline">BE POLITE.</div>
+        <p>Clothing made with care, worn with intention. Based in the Philippines, worn everywhere.</p>
+        <div class="social-row">
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-tiktok"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Shop</h5>
+        <ul>
+          <li><a href="shop.html">All Products</a></li>
+          <li><a href="shop.html?cat=T-Shirts">T-Shirts</a></li>
+          <li><a href="shop.html?cat=Hoodies">Hoodies</a></li>
+          <li><a href="shop.html?cat=Jackets">Jackets</a></li>
+          <li><a href="shop.html?cat=Bottoms">Bottoms</a></li>
+          <li><a href="shop.html?cat=Accessories">Accessories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Brand</h5>
+        <ul>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="cart.html">My Cart</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 FJD Clothing. All rights reserved.</p>
+      <div class="policies"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-container"></div>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Render grids
+  const bsGrid = document.getElementById('bestSellersGrid');
+  const naGrid = document.getElementById('newArrivalsGrid');
+  if (bsGrid) bsGrid.innerHTML = getFeaturedProducts().slice(0,4).map(renderProductCard).join('');
+  if (naGrid) naGrid.innerHTML = getNewArrivals().slice(0,4).map(renderProductCard).join('');
+
+  // Tab switching
+  document.querySelectorAll('.prod-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.prod-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      ['bestSellersGrid','newArrivalsGrid'].forEach(id => {
+        document.getElementById(id).style.display = 'none';
+      });
+      document.getElementById(tab.dataset.target).style.display = 'grid';
+    });
+  });
+
+  // Re-observe dynamically injected cards
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal:not(.revealed)').forEach(el => obs.observe(el));
+});
+</script>
+</body>
+</html>

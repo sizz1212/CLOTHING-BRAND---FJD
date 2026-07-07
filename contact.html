@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | FJD — BE POLITE.</title>
+  <meta name="description" content="Get in touch with FJD.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="ct-page">
+
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">FJD<span>BE POLITE.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="shop.html" class="nav-icon-btn"><i class="fas fa-search"></i></a>
+        <a href="wishlist.html" class="nav-icon-btn">
+          <i class="far fa-heart"></i>
+          <span class="nav-badge wishlist-badge">0</span>
+        </a>
+        <a href="cart.html" class="nav-icon-btn">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="nav-badge cart-badge">0</span>
+        </a>
+        <button class="nav-hamburger" id="hamburger">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="collections.html">Collections</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="cart.html"><i class="fas fa-shopping-bag"></i> Cart</a>
+  <a href="wishlist.html"><i class="far fa-heart"></i> Wishlist</a>
+</nav>
+
+<main>
+
+  <!-- BANNER -->
+  <section class="ct-banner">
+    <h1>Contact us</h1>
+    <p>Questions about an order, a wholesale inquiry, or just want to say hello — our team responds to every message within 1–2 business days.</p>
+  </section>
+
+  <!-- QUICK FACTS -->
+  <section class="ct-facts">
+    <div class="ct-fact">
+      <i class="fas fa-envelope"></i>
+      <div>
+        <div class="ct-fact-label">Email</div>
+        <div class="ct-fact-value">hello@fjd-clothing.com</div>
+      </div>
+    </div>
+    <div class="ct-fact">
+      <i class="fas fa-phone"></i>
+      <div>
+        <div class="ct-fact-label">Phone</div>
+        <div class="ct-fact-value">+63 91-234-5678</div>
+      </div>
+    </div>
+    <div class="ct-fact">
+      <i class="fas fa-location-dot"></i>
+      <div>
+        <div class="ct-fact-label">Location</div>
+        <div class="ct-fact-value">Binangonan, Rizal</div>
+      </div>
+    </div>
+    <div class="ct-fact">
+      <i class="far fa-clock"></i>
+      <div>
+        <div class="ct-fact-label">Hours</div>
+        <div class="ct-fact-value">Mon–Fri, 9am–6pm</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN BODY -->
+  <section class="ct-main">
+
+    <!-- FORM CARD -->
+    <div class="ct-card">
+      <p class="ct-card-label">Send a message</p>
+      <h2>We'd love to hear from you</h2>
+
+      <form id="contactForm">
+        <div class="ct-row">
+          <div class="ct-field">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" required>
+          </div>
+          <div class="ct-field">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" name="lastName" required>
+          </div>
+        </div>
+
+        <div class="ct-field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="ct-field">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject" required>
+            <option value="" disabled selected>Choose a subject</option>
+            <option value="order">Order inquiry</option>
+            <option value="returns">Returns &amp; exchanges</option>
+            <option value="wholesale">Wholesale</option>
+            <option value="collaboration">Collaboration</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+
+        <div class="ct-field">
+          <label for="message">Your message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="ct-submit">
+          <span>Send message</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+
+        <p class="ct-note">We read every message personally and respond within 1–2 business days.</p>
+      </form>
+
+      <div class="ct-success" id="formSuccess">
+        <div class="ct-success-icon"><i class="fas fa-check"></i></div>
+        <h3>Message sent.</h3>
+        <p>We'll get back to you within 1–2 business days. Politely, of course.</p>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div>
+      <div class="ct-card ct-side-card">
+        <p class="ct-card-label">Contact details</p>
+        <h2 style="margin-bottom:24px;">Reach us directly</h2>
+
+        <div class="ct-info-list">
+          <div class="ct-info-row">
+            <div class="ct-info-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <div class="ct-info-label">Email</div>
+              <div class="ct-info-value">hello@fjd-clothing.com</div>
+            </div>
+          </div>
+          <div class="ct-info-row">
+            <div class="ct-info-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <div class="ct-info-label">Phone</div>
+              <div class="ct-info-value">+63 91-234-5678</div>
+            </div>
+          </div>
+          <div class="ct-info-row">
+            <div class="ct-info-icon"><i class="fas fa-location-dot"></i></div>
+            <div>
+              <div class="ct-info-label">Location</div>
+              <div class="ct-info-value">Binangonan, Rizal<br>Philippines</div>
+            </div>
+          </div>
+        </div>
+
+        <table class="ct-hours-table">
+          <tr><td>Monday – Friday</td><td>9am – 6pm</td></tr>
+          <tr><td>Saturday</td><td>10am – 4pm</td></tr>
+          <tr><td>Sunday</td><td>Closed</td></tr>
+        </table>
+
+        <div class="ct-map"><i class="fas fa-map-location-dot"></i> Map preview</div>
+
+        <div class="ct-social">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="#" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-text">FJD</div><div class="tagline">BE POLITE.</div>
+        <p>Clothing made with care, worn with intention.</p>
+        <div class="social-row">
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Shop</h5><ul>
+        <li><a href="shop.html">All Products</a></li>
+        <li><a href="shop.html?cat=T-Shirts">T-Shirts</a></li>
+        <li><a href="shop.html?cat=Hoodies">Hoodies</a></li>
+        <li><a href="shop.html?cat=Bottoms">Bottoms</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Brand</h5><ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Support</h5><ul>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Shipping</a></li>
+        <li><a href="cart.html">My Cart</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 FJD Clothing. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="js/products.js" defer></script>
+<script src="js/cart.js" defer></script>
+<script src="js/app.js" defer></script>
+<script>
+  const form = document.getElementById('contactForm');
+  const successEl = document.getElementById('formSuccess');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.style.display = 'none';
+      if (successEl) successEl.classList.add('show');
+    });
+  }
+
+  const hamburger = document.getElementById('hamburger');
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      document.querySelector('.mobile-nav')?.classList.toggle('open');
+    });
+  }
+</script>
+</body>
+</html>

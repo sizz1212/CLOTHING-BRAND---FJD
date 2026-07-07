@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collections | FJD — BE POLITE.</title>
+  <meta name="description" content="Browse FJD collections — Essentials, Oversized, Hoodies, T-Shirts, Jackets, Bottoms, Accessories.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<!-- Added the class here to scope the CSS -->
+<body class="page-collections">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+          FJD<span>BE POLITE.</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="collections.html" class="active">Collections</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="shop.html" class="nav-icon-btn">
+            <i class="fas fa-search"></i>
+          </a>
+          <a href="wishlist.html" class="nav-icon-btn">
+            <i class="far fa-heart"></i>
+            <span class="nav-badge wishlist-badge">0</span>
+          </a>
+          <a href="cart.html" class="nav-icon-btn">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="nav-badge cart-badge">0</span>
+          </a>
+          <button class="nav-hamburger" id="hamburger">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="collections.html">Collections</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html"><i class="fas fa-shopping-bag"></i> Cart</a>
+    <a href="wishlist.html"><i class="far fa-heart"></i> Wishlist</a>
+  </nav>
+
+  <main>
+    <section class="page-hero">
+      <h1 class="wave-text">COLLECTIONS</h1>
+       <p>FJD BE POLITE</p>
+    </section>
+
+    <section class="collections-grid">
+      <a href="shop.html?category=essentials" class="collection-card">
+        <img src="https://placehold.co/700x900/33402E/AEC6E8?text=Essentials" alt="Essentials collection">
+        <div class="overlay">
+          <h3>Essentials</h3>
+          <span class="shop-link">Shop now &rarr;</span>
+        </div>
+      </a>
+      <a href="shop.html?category=oversized" class="collection-card">
+        <img src="https://placehold.co/700x900/33402E/AEC6E8?text=Oversized" alt="Oversized collection">
+        <div class="overlay">
+          <h3>Oversized</h3>
+          <span class="shop-link">Shop now &rarr;</span>
+        </div>
+      </a>
+      <a href="shop.html?category=hoodies" class="collection-card">
+        <img src="https://placehold.co/700x900/33402E/AEC6E8?text=Hoodies" alt="Hoodies collection">
+        <div class="overlay">
+          <h3>Hoodies</h3>
+          <span class="shop-link">Shop now &rarr;</span>
+        </div>
+      </a>
+      <a href="shop.html?category=t-shirts" class="collection-card">
+        <img src="https://placehold.co/700x900/33402E/AEC6E8?text=T-Shirts" alt="T-Shirts collection">
+        <div class="overlay">
+          <h3>T-Shirts</h3>
+          <span class="shop-link">Shop now &rarr;</span>
+        </div>
+      </a>
+      <a href="shop.html?category=jackets" class="collection-card">
+        <img src="https://placehold.co/700x900/33402E/AEC6E8?text=Jackets" alt="Jackets collection">
+        <div class="overlay">
+          <h3>Jackets</h3>
+          <span class="shop-link">Shop now &rarr;</span>
+        </div>
+      </a>
+      <a href="shop.html?category=bottoms" class="collection-card">
+        <img src="https://placehold.co/700x900/33402E/AEC6E8?text=Bottoms" alt="Bottoms collection">
+        <div class="overlay">
+          <h3>Bottoms</h3>
+          <span class="shop-link">Shop now &rarr;</span>
+        </div>
+      </a>
+      <a href="shop.html?category=accessories" class="collection-card">
+        <img src="https://placehold.co/700x900/33402E/AEC6E8?text=Accessories" alt="Accessories collection">
+        <div class="overlay">
+          <h3>Accessories</h3>
+          <span class="shop-link">Shop now &rarr;</span>
+        </div>
+      </a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">FJD</div><div class="tagline">BE POLITE.</div>
+          <p>Clothing made with care, worn with intention.</p>
+          <div class="social-row">
+            <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div class="footer-col"><h5>Shop</h5><ul><li><a href="shop.html">All Products</a></li><li><a href="shop.html?cat=T-Shirts">T-Shirts</a></li><li><a href="shop.html?cat=Hoodies">Hoodies</a></li><li><a href="shop.html?cat=Bottoms">Bottoms</a></li></ul></div>
+        <div class="footer-col"><h5>Brand</h5><ul><li><a href="about.html">About</a></li><li><a href="collections.html">Collections</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h5>Support</h5><ul><li><a href="#">Size Guide</a></li><li><a href="#">Shipping</a></li><li><a href="cart.html">My Cart</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 FJD Clothing. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/pages.js"></script>
+</body>
+</html>
